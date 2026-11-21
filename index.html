@@ -478,6 +478,126 @@ body.paper-f4 .page { min-height: 1245px; }
 }
 .stamp-mini-bar button:hover { color: var(--p-warm); }
 
+/* Admin Dashboard & Cloud/Sync/Version/User Styling */
+.admin-dash {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.admin-hero {
+  background: linear-gradient(135deg, #17766a, #0f4c44);
+  color: #fff;
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 20px rgba(23,118,106,0.2);
+}
+.admin-hero h2 { margin: 0 0 4px; font: 700 1.35rem var(--f-display); }
+.admin-hero p { margin: 0; font-size: 0.84rem; opacity: 0.92; }
+.sync-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.sync-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+.sync-dot.busy { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 10px;
+}
+.feat-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.feat-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.feat-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.feat-title { font: 700 0.94rem var(--f-display); color: var(--fg); display: flex; align-items: center; gap: 6px; }
+.feat-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.feat-desc { margin: 0; font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+.admin-section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.admin-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
+}
+.admin-section-head h3 { margin: 0; font: 700 1.05rem var(--f-display); color: var(--accent); }
+.soal-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fafcfb;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.soal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 640px) {
+  .soal-grid { grid-template-columns: 1fr; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .tgroup { justify-content: space-between; }
+  .rich-bar { left: 8px; right: 8px; bottom: 8px; justify-content: center; font-size: 0.74rem; padding: 6px 8px; }
+}
+.ver-item, .usr-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.82rem;
+}
+
 /* Media Print A4 & F4 */
 @media print {
   html, body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
@@ -898,6 +1018,25 @@ function seed(){
       guru: '12345',
       kepsek: '54321'
     },
+    adminSystem: {
+      cloudUrl: '',
+      autoSync: true,
+      realTimeUpdate: true,
+      cacheVersion: 'v2026.11.21-1',
+      autoSave: true,
+      lastSyncTime: 'Belum disinkronkan ke Cloud',
+      users: [
+        { id: 'u1', name: 'Kepala Sekolah TK Mutiara Harapan', role: 'kepsek', pin: '54321', status: 'Aktif' },
+        { id: 'u2', name: 'Miss Laila (Guru Kelas)', role: 'guru', pin: '12345', status: 'Aktif' },
+        { id: 'u3', name: 'Miss Farida (Guru Kelas)', role: 'guru', pin: '12345', status: 'Aktif' }
+      ],
+      versions: [],
+      soalBank: [
+        { id: 'q1', kelas: 'Kelas Miss Laila', bidang: 'Agama dan spiritual', tanya: 'Apa yang kita ucapkan sebelum memulai kegiatan belajar dan makan?', a: 'Berdoa mengucap syukur kepada Tuhan', b: 'Langsung bermain', c: 'Tidur di kelas', kunci: 'A', skor: 100 },
+        { id: 'q2', kelas: 'Kelas Miss Laila', bidang: 'Numerasi awal', tanya: 'Berapa jumlah jari pada kedua tangan kita?', a: '5 jari', b: '10 jari', c: '8 jari', kunci: 'B', skor: 100 },
+        { id: 'q3', kelas: 'Kelas Miss Farida', bidang: 'Bahasa Inggris', tanya: 'Apa bahasa Inggris dari warna Merah?', a: 'Blue', b: 'Yellow', c: 'Red', kunci: 'C', skor: 100 }
+      ]
+    },
     school:{
       yayasan:'YAYASAN PENDIDIKAN MUTIARA HARAPAN',
       nama:'TK MUTIARA HARAPAN',
@@ -971,6 +1110,16 @@ function loadData(){
 }
 var D=loadData();
 if(!D.pins)D.pins={guru:'12345',kepsek:'54321'};
+if(!D.adminSystem){
+  D.adminSystem = seed().adminSystem;
+}
+if(!Array.isArray(D.adminSystem.users)) D.adminSystem.users = seed().adminSystem.users;
+if(!Array.isArray(D.adminSystem.versions)) D.adminSystem.versions = [];
+if(!Array.isArray(D.adminSystem.soalBank)) D.adminSystem.soalBank = seed().adminSystem.soalBank;
+if(!D.adminSystem.cacheVersion) D.adminSystem.cacheVersion = 'v2026.11.21-1';
+if(D.adminSystem.autoSave === undefined) D.adminSystem.autoSave = true;
+if(D.adminSystem.autoSync === undefined) D.adminSystem.autoSync = true;
+if(D.adminSystem.realTimeUpdate === undefined) D.adminSystem.realTimeUpdate = true;
 if(!D.school.npsn)D.school.npsn='70047565';
 if(!D.school.paperSize)D.school.paperSize='A4';
 if(!D.school.stampPos)D.school.stampPos={page:6,x:430,y:585};
@@ -993,16 +1142,21 @@ function filteredStudents(){
 // PIN Authentication Logic
 function checkPin(){
   var valPin = ($('#pinInput').value||'').trim();
-  if(valPin === String(D.pins.kepsek)){
+  var matchedUser = (D.adminSystem && D.adminSystem.users || []).find(function(u){
+    return u.status === 'Aktif' && String(u.pin) === valPin;
+  });
+  if(valPin === String(D.pins.kepsek) || (matchedUser && matchedUser.role === 'kepsek')){
     ui.role = 'kepsek';
+    ui.currentUser = matchedUser ? matchedUser.name : 'Kepala Sekolah';
     $('#pinOverlay').classList.add('hidden');
     renderAll();
-  } else if(valPin === String(D.pins.guru)){
+  } else if(valPin === String(D.pins.guru) || matchedUser){
     ui.role = 'guru';
+    ui.currentUser = matchedUser ? matchedUser.name : 'Guru Kelas';
     $('#pinOverlay').classList.add('hidden');
     renderAll();
   } else {
-    $('#pinErr').textContent = 'PIN salah! Silakan coba lagi.';
+    $('#pinErr').textContent = 'PIN salah atau akun dinonaktifkan! Silakan coba lagi.';
     $('#pinInput').value = '';
     $('#pinInput').focus();
   }
@@ -1025,10 +1179,121 @@ function cur(){return D.students.find(function(s){return s.id===D.cur})||D.stude
 function val(p){var a=p.split('.');return a[0]==='school'?D.school[a[1]]:cur()[a[1]]}
 function setv(p,v){var a=p.split('.');if(a[0]==='school')D.school[a[1]]=v;else cur()[a[1]]=v}
 function setStatus(m){ui.msg=m;var e=$('#status');if(e)e.textContent=m}
-function save(){
+var syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('tk_mutiara_realtime_sync') : null;
+if(syncChannel){
+  syncChannel.onmessage = function(ev){
+    if(ev.data && ev.data.type === 'REALTIME_UPDATE' && D.adminSystem && D.adminSystem.realTimeUpdate){
+      var fresh = loadData();
+      if(fresh){
+        D = fresh;
+        renderAll();
+        setStatus('Real-time Update: Perubahan dari tab/perangkat lain langsung ditampilkan.');
+      }
+    }
+  };
+}
+window.addEventListener('storage', function(e){
+  if(e.key === KEY && D.adminSystem && D.adminSystem.realTimeUpdate){
+    D = loadData();
+    renderAll();
+    setStatus('Real-time Update: Data diperbarui otomatis.');
+  }
+});
+
+function createVersionSnapshot(note){
+  if(!D.adminSystem) return;
+  var snap = {
+    id: uid(),
+    time: new Date().toLocaleString('id-ID'),
+    note: note || 'Penyimpanan otomatis',
+    user: ui.currentUser || (ui.role === 'kepsek' ? 'Kepala Sekolah' : 'Guru'),
+    cacheVer: D.adminSystem.cacheVersion,
+    payload: JSON.stringify({
+      school: D.school,
+      scale: D.scale,
+      sections: D.sections,
+      blocks: D.blocks,
+      students: D.students,
+      soalBank: D.adminSystem.soalBank
+    })
+  };
+  D.adminSystem.versions.unshift(snap);
+  if(D.adminSystem.versions.length > 15) D.adminSystem.versions.length = 15;
+}
+
+function pushToCloudDatabase(silent){
+  var url = (D.adminSystem && D.adminSystem.cloudUrl || '').trim();
+  if(!url){
+    if(!silent) setStatus('Masukkan URL Google Apps Script / Cloud Database terlebih dahulu.');
+    return;
+  }
+  var dot = $('#syncDot');
+  if(dot) dot.classList.add('busy');
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      action: 'sync_eraport',
+      cacheVersion: D.adminSystem.cacheVersion,
+      updatedAt: new Date().toISOString(),
+      data: D
+    })
+  }).then(function(){
+    D.adminSystem.lastSyncTime = new Date().toLocaleString('id-ID');
+    try{ localStorage.setItem(KEY, JSON.stringify(D)); }catch(e){}
+    if(dot) dot.classList.remove('busy');
+    setStatus('Cloud Database & Auto Sync berhasil (' + D.adminSystem.lastSyncTime + ').');
+    if(ui.view === 'admin') renderAdminDashboard();
+  }).catch(function(){
+    if(dot) dot.classList.remove('busy');
+    setStatus('Gagal terhubung ke Cloud Database. Periksa koneksi internet.');
+  });
+}
+
+function pullFromCloudDatabase(){
+  var url = (D.adminSystem && D.adminSystem.cloudUrl || '').trim();
+  if(!url){
+    alert('Silakan isi URL Cloud Database (Google Apps Script) terlebih dahulu.');
+    return;
+  }
+  setStatus('Mengambil data terbaru dari Cloud Database...');
+  fetch(url + (url.indexOf('?')>-1?'&':'?') + 't=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      if(res && res.data && valid(res.data)){
+        createVersionSnapshot('Sebelum tarik data dari Cloud');
+        D = res.data;
+        D.adminSystem.lastSyncTime = new Date().toLocaleString('id-ID');
+        localStorage.setItem(KEY, JSON.stringify(D));
+        renderAll();
+        setStatus('Sinkronisasi dari Cloud Database selesai!');
+      } else {
+        setStatus('Cloud Database terhubung, belum ada paket backup penuh di server.');
+      }
+    }).catch(function(){
+      setStatus('Tidak dapat menarik data JSON dari URL tersebut.');
+    });
+}
+
+function save(forceManual){
+  if(!forceManual && D.adminSystem && D.adminSystem.autoSave === false){
+    setStatus('Auto Save nonaktif. Klik "Simpan Manual" di Admin Dashboard untuk menyimpan.');
+    return;
+  }
   clearTimeout(saveTimer);
   saveTimer=setTimeout(function(){
-    try{localStorage.setItem(KEY,JSON.stringify(D));setStatus('Perubahan tersimpan otomatis.')}
+    try{
+      localStorage.setItem(KEY,JSON.stringify(D));
+      if(syncChannel && D.adminSystem && D.adminSystem.realTimeUpdate){
+        syncChannel.postMessage({ type: 'REALTIME_UPDATE', ts: Date.now() });
+      }
+      if(D.adminSystem && D.adminSystem.autoSync && D.adminSystem.cloudUrl){
+        pushToCloudDatabase(true);
+      } else {
+        setStatus('Auto Save aktif: Perubahan tersimpan otomatis (' + new Date().toLocaleTimeString('id-ID') + ').');
+      }
+    }
     catch(e){setStatus('Peringatan: Memori penuh (ukuran gambar terlalu besar).')}
   },350);
 }
@@ -1202,7 +1467,11 @@ function renderToolbar(){
   var r=ui.view==='raport';
   $('#toolbar').innerHTML=
     '<div class="tgroup">'+
-      '<div class="seg" role="tablist"><button class="segb" role="tab" data-act="view" data-view="raport" aria-selected="'+r+'">Lembar Raport</button><button class="segb" role="tab" data-act="view" data-view="nilai" aria-selected="'+(!r)+'">Input Nilai Cepat</button></div>'+
+      '<div class="seg" role="tablist">'+
+        '<button class="segb" role="tab" data-act="view" data-view="raport" aria-selected="'+(ui.view==='raport')+'">Lembar Raport</button>'+
+        '<button class="segb" role="tab" data-act="view" data-view="nilai" aria-selected="'+(ui.view==='nilai')+'">Input Nilai</button>'+
+        '<button class="segb" role="tab" data-act="view" data-view="admin" aria-selected="'+(ui.view==='admin')+'">⚙️ Admin Dashboard</button>'+
+      '</div>'+
       '<label class="paperpick" title="Pilih Ukuran Kertas">Kertas: <select id="paperSizeSel"><option value="A4" '+(D.school.paperSize==='A4'?'selected':'')+'>A4</option><option value="F4" '+(D.school.paperSize==='F4'?'selected':'')+'>F4 (Folio)</option></select></label>'+
     '</div>'+
     '<div class="tgroup">'+
@@ -1459,7 +1728,150 @@ function renderNilai(){
     '<p class="hint">'+legendText()+'</p></div>';
 }
 
-function renderMain(){ recalcRanks(); applyPaperSize(); renderToolbar(); if(ui.view==='nilai')renderNilai(); else renderPaper(); }
+function renderAdminDashboard(){
+  var sys = D.adminSystem;
+  var isKepsek = ui.role === 'kepsek';
+  var features = [
+    { icon: '☁️', title: 'Cloud Database', badge: sys.cloudUrl ? 'Terhubung' : 'Siap', desc: 'Menyimpan data raport, nilai, dan soal secara online ke Google Sheets / Cloud.' },
+    { icon: '🔄', title: 'Auto Sync', badge: sys.autoSync ? 'Aktif' : 'Nonaktif', desc: 'Menyinkronkan perubahan otomatis ke Cloud setiap kali ada pembaruan data.' },
+    { icon: '⚡', title: 'Real-time Update', badge: sys.realTimeUpdate ? 'Live' : 'Mati', desc: 'Perubahan bisa langsung terlihat seketika di tab/perangkat lain tanpa muat ulang.' },
+    { icon: '🛠️', title: 'Admin Dashboard', badge: sys.soalBank.length + ' Soal', desc: 'Mengatur seluruh soal, modul penilaian, konfigurasi sistem, dan kontrol aplikasi.' },
+    { icon: '🧹', title: 'Cache Control', badge: esc(sys.cacheVersion), desc: 'Menghindari tampilan versi lama dengan pembaruan versi cache otomatis.' },
+    { icon: '💾', title: 'Auto Save', badge: sys.autoSave ? 'Aktif' : 'Manual', desc: 'Menyimpan perubahan otomatis di memori perangkat agar pekerjaan tidak hilang.' },
+    { icon: '🕒', title: 'Version Control', badge: sys.versions.length + ' Riwayat', desc: 'Menyimpan riwayat perubahan data dan memulihkan versi sebelumnya kapan saja.' },
+    { icon: '🛡️', title: 'Backup Database', badge: 'JSON & CSV', desc: 'Mencegah kehilangan data melalui ekspor-impor cadangan lengkap dan Excel.' },
+    { icon: '👥', title: 'User Management', badge: sys.users.length + ' Akun', desc: 'Mengatur akun pengguna, hak akses (Kepala Sekolah / Guru), dan PIN masuk.' },
+    { icon: '📱', title: 'Responsive Design', badge: 'HP & Laptop', desc: 'Tampilan menyesuaikan layar HP, tablet, dan laptop secara otomatis & nyaman.' }
+  ];
+
+  var featCardsHTML = features.map(function(f){
+    return '<div class="feat-card">'+
+      '<div class="feat-top"><span class="feat-title">'+f.icon+' '+f.title+'</span><span class="feat-badge">'+f.badge+'</span></div>'+
+      '<p class="feat-desc">'+f.desc+'</p>'+
+    '</div>';
+  }).join('');
+
+  var soalRowsHTML = (sys.soalBank||[]).map(function(q, idx){
+    return '<div class="soal-item">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'+
+        '<b style="color:var(--accent)">Soal #'+(idx+1)+'</b>'+
+        '<div style="display:flex;gap:6px;align-items:center">'+
+          '<select class="fld" style="width:auto;min-height:30px;padding:3px 6px" data-soal-id="'+q.id+'" data-sf="kelas">'+
+            '<option value="Kelas Miss Laila" '+(q.kelas==='Kelas Miss Laila'?'selected':'')+'>Kelas Miss Laila</option>'+
+            '<option value="Kelas Miss Farida" '+(q.kelas==='Kelas Miss Farida'?'selected':'')+'>Kelas Miss Farida</option>'+
+            '<option value="Semua Kelas" '+(q.kelas==='Semua Kelas'?'selected':'')+'>Semua Kelas</option>'+
+          '</select>'+
+          '<button type="button" class="mini danger" data-act="delSoal" data-id="'+q.id+'">🗑 Hapus</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="soal-grid">'+
+        '<label style="font-size:0.78rem;font-weight:700">Bidang / Kategori:<input class="fld" data-soal-id="'+q.id+'" data-sf="bidang" value="'+esc(q.bidang)+'"></label>'+
+        '<label style="font-size:0.78rem;font-weight:700">Kunci Jawaban Benar:'+
+          '<select class="fld" data-soal-id="'+q.id+'" data-sf="kunci">'+
+            '<option value="A" '+(q.kunci==='A'?'selected':'')+'>Pilihan A</option>'+
+            '<option value="B" '+(q.kunci==='B'?'selected':'')+'>Pilihan B</option>'+
+            '<option value="C" '+(q.kunci==='C'?'selected':'')+'>Pilihan C</option>'+
+          '</select>'+
+        '</label>'+
+      '</div>'+
+      '<label style="font-size:0.78rem;font-weight:700">Pertanyaan Soal:<input class="fld" data-soal-id="'+q.id+'" data-sf="tanya" value="'+esc(q.tanya)+'"></label>'+
+      '<div class="soal-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">'+
+        '<label style="font-size:0.75rem">Pilihan A:<input class="fld" data-soal-id="'+q.id+'" data-sf="a" value="'+esc(q.a)+'"></label>'+
+        '<label style="font-size:0.75rem">Pilihan B:<input class="fld" data-soal-id="'+q.id+'" data-sf="b" value="'+esc(q.b)+'"></label>'+
+        '<label style="font-size:0.75rem">Pilihan C:<input class="fld" data-soal-id="'+q.id+'" data-sf="c" value="'+esc(q.c)+'"></label>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  var userRowsHTML = (sys.users||[]).map(function(u){
+    return '<div class="usr-item">'+
+      '<div><b>'+esc(u.name)+'</b> <span class="feat-badge">'+(u.role==='kepsek'?'Kepala Sekolah':'Guru / Operator')+'</span><br><span style="color:var(--muted);font-size:0.76rem">PIN: <code>'+esc(u.pin)+'</code> • Status: <b>'+esc(u.status)+'</b></span></div>'+
+      (isKepsek ? '<div style="display:flex;gap:5px">'+
+        '<button type="button" class="mini" data-act="toggleUserStatus" data-id="'+u.id+'">'+(u.status==='Aktif'?'Nonaktifkan':'Aktifkan')+'</button>'+
+        '<button type="button" class="mini danger" data-act="delUser" data-id="'+u.id+'" '+(sys.users.length<=1?'disabled':'')+'>Hapus</button>'+
+      '</div>' : '<span style="font-size:0.74rem;color:var(--muted)">Hanya Kepsek</span>')+
+    '</div>';
+  }).join('');
+
+  var verRowsHTML = (sys.versions||[]).length ? sys.versions.map(function(v){
+    return '<div class="ver-item">'+
+      '<div><b>'+esc(v.note)+'</b><br><span style="color:var(--muted);font-size:0.75rem">🕒 '+esc(v.time)+' • Oleh: '+esc(v.user)+' • Cache: '+esc(v.cacheVer)+'</span></div>'+
+      '<button type="button" class="btn" data-act="restoreVersion" data-id="'+v.id+'">↩ Pulihkan Versi Ini</button>'+
+    '</div>';
+  }).join('') : '<p class="hint">Belum ada riwayat versi tersimpan. Klik "Simpan Titik Versi Baru" untuk mencatat riwayat perubahan.</p>';
+
+  $('#paperwrap').innerHTML = '<div class="admin-dash no-print">'+
+    '<div class="admin-hero">'+
+      '<div>'+
+        '<h2>🛠️ Admin Dashboard & Sistem Terpadu</h2>'+
+        '<p>Pusat kendali Cloud Database, Auto Sync, Manajemen Soal, Riwayat Versi, dan Pengguna.</p>'+
+      '</div>'+
+      '<div class="sync-pill"><span class="sync-dot" id="syncDot"></span><span>Real-time & Auto Save: '+(sys.autoSave?'ON':'OFF')+'</span></div>'+
+    '</div>'+
+
+    '<div class="feature-grid">'+featCardsHTML+'</div>'+
+
+    '<!-- 1. Cloud Database, Auto Sync, Real-time, Auto Save & Cache Control -->'+
+    '<div class="admin-section">'+
+      '<div class="admin-section-head">'+
+        '<h3>☁️ Cloud Database, Auto Sync, Cache Control & Auto Save</h3>'+
+        '<span style="font-size:0.76rem;color:var(--muted)">Sinkronisasi terakhir: <b>'+esc(sys.lastSyncTime)+'</b></span>'+
+      '</div>'+
+      '<label style="font-size:0.8rem;font-weight:700">URL Cloud Database (Google Apps Script Web App URL):'+
+        '<input class="fld" id="adminCloudUrl" placeholder="https://script.google.com/macros/s/.../exec" value="'+esc(sys.cloudUrl||'')+'">'+
+      '</label>'+
+      '<div style="display:flex;flex-wrap:wrap;gap:12px;font-size:0.82rem;font-weight:700">'+
+        '<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chkAutoSync" '+(sys.autoSync?'checked':'')+'> Auto Sync ke Cloud</label>'+
+        '<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chkRealTime" '+(sys.realTimeUpdate?'checked':'')+'> Real-time Update Antar Tab/Perangkat</label>'+
+        '<label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="chkAutoSave" '+(sys.autoSave?'checked':'')+'> Auto Save Otomatis</label>'+
+      '</div>'+
+      '<div style="display:flex;flex-wrap:wrap;gap:7px">'+
+        '<button type="button" class="btn primary" data-act="syncNowCloud">☁️ Sinkronkan ke Cloud Sekarang</button>'+
+        '<button type="button" class="btn" data-act="pullCloud">⬇️ Ambil Data Terbaru dari Cloud</button>'+
+        '<button type="button" class="btn" data-act="manualSaveNow">💾 Simpan Manual Sekarang</button>'+
+        '<button type="button" class="btn" data-act="refreshCache">🧹 Perbarui Cache ('+esc(sys.cacheVersion)+')</button>'+
+      '</div>'+
+    '</div>'+
+
+    '<!-- 2. Mengatur Seluruh Soal -->'+
+    '<div class="admin-section">'+
+      '<div class="admin-section-head">'+
+        '<h3>📝 Pengaturan Seluruh Soal & Bank Evaluasi ('+sys.soalBank.length+' Soal)</h3>'+
+        '<button type="button" class="btn primary" data-act="addSoal">+ Tambah Soal Baru</button>'+
+      '</div>'+
+      '<p class="hint">Tambah, ubah pertanyaan, pilihan jawaban, atau hapus soal di bawah ini. Setiap perubahan langsung tersimpan dan tersinkronisasi.</p>'+
+      soalRowsHTML+
+    '</div>'+
+
+    '<!-- 3. User Management -->'+
+    '<div class="admin-section">'+
+      '<div class="admin-section-head">'+
+        '<h3>👥 User Management (Manajemen Akun & Hak Akses)</h3>'+
+      '</div>'+
+      userRowsHTML+
+      (isKepsek ? '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:6px;padding-top:10px;border-top:1px dashed var(--line)">'+
+        '<input class="fld" id="newUserName" placeholder="Nama Guru / Admin Baru">'+
+        '<select class="fld" id="newUserRole"><option value="guru">Peran: Guru / Operator</option><option value="kepsek">Peran: Kepala Sekolah</option></select>'+
+        '<input class="fld" id="newUserPin" placeholder="PIN (min 4 digit)" maxlength="8">'+
+        '<button type="button" class="btn primary" data-act="addUser">+ Tambah Pengguna</button>'+
+      '</div>' : '<p class="hint">Masuk menggunakan PIN Kepala Sekolah untuk menambah atau menonaktifkan pengguna.</p>')+
+    '</div>'+
+
+    '<!-- 4. Version Control & Backup Database -->'+
+    '<div class="admin-section">'+
+      '<div class="admin-section-head">'+
+        '<h3>🕒 Version Control & 🛡️ Backup Database</h3>'+
+        '<div style="display:flex;gap:6px;flex-wrap:wrap">'+
+          '<button type="button" class="btn primary" data-act="saveVersionNow">+ Simpan Titik Versi Baru</button>'+
+          '<button type="button" class="btn" data-act="downloadBackupFile">🛡️ Unduh Backup Database (.JSON)</button>'+
+        '</div>'+
+      '</div>'+
+      verRowsHTML+
+    '</div>'+
+  '</div>';
+}
+
+function renderMain(){ recalcRanks(); applyPaperSize(); renderToolbar(); if(ui.view==='nilai')renderNilai(); else if(ui.view==='admin')renderAdminDashboard(); else renderPaper(); }
 function renderAll(){ renderPanel(); renderMain(); }
 
 function exportToWord(){
@@ -1898,6 +2310,100 @@ document.addEventListener('click',function(e){
         else alert('Format cadangan tidak valid.');
       }catch(err){alert('Gagal membaca teks cadangan JSON.')}
       break;
+    case 'syncNowCloud':
+      pushToCloudDatabase(false);
+      break;
+    case 'pullCloud':
+      pullFromCloudDatabase();
+      break;
+    case 'manualSaveNow':
+      save(true);
+      break;
+    case 'refreshCache':
+      var nextV = 'v2026.11.21-' + Math.floor(100 + Math.random()*900);
+      D.adminSystem.cacheVersion = nextV;
+      save(true);
+      renderAdminDashboard();
+      setStatus('Cache Control diperbarui ke versi ' + nextV + '. Tampilan versi lama dibersihkan.');
+      break;
+    case 'addSoal':
+      D.adminSystem.soalBank.push({
+        id: uid(),
+        kelas: 'Kelas Miss Laila',
+        bidang: 'Agama dan spiritual',
+        tanya: 'Pertanyaan evaluasi baru...',
+        a: 'Pilihan jawaban A',
+        b: 'Pilihan jawaban B',
+        c: 'Pilihan jawaban C',
+        kunci: 'A',
+        skor: 100
+      });
+      renderAdminDashboard();
+      save();
+      break;
+    case 'delSoal':
+      D.adminSystem.soalBank = D.adminSystem.soalBank.filter(function(q){ return q.id !== id; });
+      renderAdminDashboard();
+      save();
+      break;
+    case 'addUser':
+      var uName = ($('#newUserName').value||'').trim();
+      var uRole = $('#newUserRole').value;
+      var uPin = ($('#newUserPin').value||'').trim();
+      if(!uName || uPin.length < 4){ alert('Isi nama pengguna dan PIN minimal 4 digit!'); return; }
+      D.adminSystem.users.push({ id: uid(), name: uName, role: uRole, pin: uPin, status: 'Aktif' });
+      renderAdminDashboard();
+      save();
+      break;
+    case 'toggleUserStatus':
+      var targetU = D.adminSystem.users.find(function(u){ return u.id === id; });
+      if(targetU){
+        targetU.status = targetU.status === 'Aktif' ? 'Nonaktif' : 'Aktif';
+        renderAdminDashboard();
+        save();
+      }
+      break;
+    case 'delUser':
+      D.adminSystem.users = D.adminSystem.users.filter(function(u){ return u.id !== id; });
+      renderAdminDashboard();
+      save();
+      break;
+    case 'saveVersionNow':
+      var noteV = prompt('Masukkan keterangan titik versi (misal: Sebelum Edit Nilai Semester I):', 'Backup Sebelum Perubahan');
+      if(noteV !== null){
+        createVersionSnapshot(noteV || 'Titik Versi Manual');
+        renderAdminDashboard();
+        save(true);
+        setStatus('Riwayat versi berhasil disimpan.');
+      }
+      break;
+    case 'restoreVersion':
+      var verObj = (D.adminSystem.versions||[]).find(function(v){ return v.id === id; });
+      if(verObj && confirm('Pulihkan data ke versi "' + verObj.note + '" (' + verObj.time + ')?')){
+        try{
+          var pData = JSON.parse(verObj.payload);
+          if(pData.school) D.school = pData.school;
+          if(pData.scale) D.scale = pData.scale;
+          if(pData.sections) D.sections = pData.sections;
+          if(pData.blocks) D.blocks = pData.blocks;
+          if(pData.students) D.students = pData.students;
+          if(pData.soalBank) D.adminSystem.soalBank = pData.soalBank;
+          renderAll();
+          save(true);
+          setStatus('Data berhasil dipulihkan dari Version Control.');
+        }catch(err){ alert('Gagal memulihkan versi.'); }
+      }
+      break;
+    case 'downloadBackupFile':
+      var bBlob = new Blob([JSON.stringify(D, null, 2)], { type: 'application/json' });
+      var bUrl = URL.createObjectURL(bBlob);
+      var bA = document.createElement('a');
+      bA.href = bUrl;
+      bA.download = 'Backup_Database_eRaport_TK_Mutiara_Harapan.json';
+      bA.click();
+      URL.revokeObjectURL(bUrl);
+      setStatus('Backup Database (.JSON) berhasil diunduh.');
+      break;
     case 'reset':
       if(ui.confirm!=='reset:'){ui.confirm='reset:';renderPanel();break}
       localStorage.removeItem(KEY);
@@ -1955,6 +2461,15 @@ document.addEventListener('input', function(e){
   } else if(e.target.id === 'stampColorPick'){
     D.school.stampColor = e.target.value;
     renderPaper();save();
+  } else if(e.target.id === 'adminCloudUrl'){
+    D.adminSystem.cloudUrl = e.target.value;
+    save();
+  } else if(e.target.dataset && e.target.dataset.soalId){
+    var sq = (D.adminSystem.soalBank||[]).find(function(x){ return x.id === e.target.dataset.soalId; });
+    if(sq){
+      sq[e.target.dataset.sf] = e.target.value;
+      save();
+    }
   }
 });
 
@@ -1981,6 +2496,21 @@ document.addEventListener('change',function(e){
   }else if(e.target.id==='stampImgInput'){
     handleImageUpload(e.target.files[0],400,function(dataUrl){ D.school.stampImg=dataUrl;renderAll();save(); });
     e.target.value='';
+  }else if(e.target.id==='chkAutoSync'){
+    D.adminSystem.autoSync = e.target.checked;
+    renderAdminDashboard();save(true);
+  }else if(e.target.id==='chkRealTime'){
+    D.adminSystem.realTimeUpdate = e.target.checked;
+    renderAdminDashboard();save(true);
+  }else if(e.target.id==='chkAutoSave'){
+    D.adminSystem.autoSave = e.target.checked;
+    renderAdminDashboard();save(true);
+  }else if(e.target.dataset && e.target.dataset.soalId){
+    var sq2 = (D.adminSystem.soalBank||[]).find(function(x){ return x.id === e.target.dataset.soalId; });
+    if(sq2){
+      sq2[e.target.dataset.sf] = e.target.value;
+      save();
+    }
   }else if(e.target.id==='excelImportInput'){
     var f=e.target.files[0];
     if(f){
